@@ -8,7 +8,7 @@
     if (feedbackList == null) {
         feedbackList = new java.util.ArrayList<>();
     }
-    request.setAttribute("feedbackList", feedbackList); // Set for JSTL to work
+    request.setAttribute("feedbackList", feedbackList);
 %>
 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 30px;
-            background-color: #2c2f33; /* Dusky background */
+            background-color: #2c2f33;
             color: #f1f1f1;
         }
         .review-box {
@@ -29,11 +29,17 @@
             padding: 15px 20px;
             margin-bottom: 20px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: relative;
         }
         .stars {
-            color: #ffd700; /* Gold stars */
             font-size: 18px;
             margin-bottom: 8px;
+        }
+        .stars span {
+            color: #ffd700;
+        }
+        .stars span.empty {
+            color: #555;
         }
         .review-text {
             font-size: 16px;
@@ -48,7 +54,7 @@
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #7289da; /* Discord-like dusky blue */
+            background-color: #7289da;
             color: white;
             text-decoration: none;
             border-radius: 6px;
@@ -58,6 +64,21 @@
         }
         h2 {
             color: #ffffff;
+        }
+        .options-menu {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .options-menu a {
+            color: #bbb;
+            margin-left: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .options-menu a:hover {
+            color: #fff;
         }
     </style>
 </head>
@@ -69,12 +90,23 @@
             <c:forEach var="fb" items="${feedbackList}">
                 <div class="review-box">
                     <div class="stars">
-                        <c:forEach var="i" begin="1" end="${fb.rating}">
-                            &#9733;
+                        <c:forEach var="star" begin="1" end="5">
+                            <c:choose>
+                                <c:when test="${star <= fb.rating}">
+                                    <span>&#9733;</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="empty">&#9733;</span>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </div>
                     <div class="review-text">${fb.couldDoBetter}</div>
                     <div class="timestamp">${fb.timestamp}</div>
+                    <div class="options-menu">
+                        <a href="EditFeedbackServlet?id=${fb.id}" title="Edit">&#9998;</a> <!-- Pencil icon -->
+                        <a href="DeleteFeedbackServlet?id=${fb.id}" title="Delete" onclick="return confirm('Are you sure you want to delete this feedback?');">&#10006;</a> <!-- Cross icon -->
+                    </div>
                 </div>
             </c:forEach>
         </c:when>
