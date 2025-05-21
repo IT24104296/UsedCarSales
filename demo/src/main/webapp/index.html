@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Car Selling - Communication System</title>
+  <style>
+    /* Your existing CSS here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h2{
+      text-align:center;
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 10px;
+      color:orange;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 40px;
+      box-shadow: 0 2px 10px green;
+    }
+
+    .faq-section h2 {
+      text-align: center;;
+    }
+
+    .faq-item {
+      margin-bottom: 15px;
+      border-radius:80px;
+    }
+
+    .faq-question {
+      cursor: pointer;
+      background-color: lightBlue;
+      color: black;
+      padding: 15px;
+      border-radius:80px;
+      font-weight: bold;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 12px;
+      height:auto;
+      background-color: silver;
+      border-radius: 80px;
+      margin-top: 5px;
+    }
+
+    .faq-answer.active {
+      display: block;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #25D366;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+    }
+
+    .whatsapp-button img {
+      width: 24px;
+      margin-right: 10px;
+    }
+    .whatsapp-button:hover{
+      color:Black;
+      background-color:orange;
+    }
+
+    /* Chatbot Section */
+    .chatbot-container {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 500px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px orange;
+      display: none;
+      flex-direction: column;
+    }
+
+    .chatbot-container.active {
+      display: flex;
+    }
+
+    .chatbot-header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chatbot-body {
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .chat-message {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 15px;
+    }
+
+    .user-message {
+      background-color: #007bff;
+      color: #fff;
+      margin-left: 20%;
+      border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+      background-color: #e9ecef;
+      color: #333;
+      margin-right: 20%;
+      border-bottom-left-radius: 5px;
+    }
+
+    .chatbot-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chatbot-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      outline: none;
+      border-bottom-left-radius: 10px;
+    }
+
+    .chatbot-input button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-bottom-right-radius: 10px;
+    }
+
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+  </style>
+</head>
+<body>
+<!-- FAQ Section -->
+<div class="faq-section">
+  <h2><b>Frequently Asked Questions</b></h2><br><br>
+  <div class="faq-item">
+    <div class="faq-question">1. What types of cars do you sell?</div>
+    <div class="faq-answer">We offer a wide range of vehicles including sedans, SUVs, trucks, and electric cars from various brands.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">2. Do you provide financing options?</div>
+    <div class="faq-answer">Yes, we offer flexible financing plans with competitive rates. Contact us for details.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">3. Can I test drive a car?</div>
+    <div class="faq-answer">Absolutely! Schedule a test drive through our website or by contacting our team.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">4. What is your return policy?</div>
+    <div class="faq-answer">We offer a 7-day return policy for eligible vehicles, subject to terms and conditions.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">5. Are your cars certified pre-owned?</div>
+    <div class="faq-answer">Many of our used cars are certified pre-owned, passing rigorous inspections for quality.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">6. How can I book a car online?</div>
+    <div class="faq-answer">Browse our inventory, select your car, and follow the online booking process. Our team will assist you.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">7. Do you offer warranties?</div>
+    <div class="faq-answer">Yes, we provide warranties on most vehicles. Details vary by model and year.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">8. Can I trade in my old car?</div>
+    <div class="faq-answer">Yes, we accept trade-ins. Get an estimated value by submitting your car's details online.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">9. How long does delivery take?</div>
+    <div class="faq-answer">Delivery times vary by location but typically take 3-7 business days after purchase.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">10. How can I contact support?</div>
+    <div class="faq-answer">Reach us via our chatbot, WhatsApp, email, or call our support line at 1-800-CAR-SALE.</div>
+  </div>
+</div>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/1234567890?text=Hi,%20I%27m%20interested%20in%20buying%20a%20car.%20Can%20you%20assist%20me%3F" class="whatsapp-button">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" />
+  Chat on WhatsApp
+</a>
+
+<!-- Chatbot Toggle Button -->
+<div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+
+<!-- Chatbot Container -->
+<div class="chatbot-container" id="chatbot">
+  <div class="chatbot-header">Car Buying Assistant</div>
+  <div class="chatbot-body" id="chatbot-body">
+    <div class="bot-message">Hello! Welcome to our car buying assistant. How can I help you today?</div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbot-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  // FAQ Toggle
+  document.querySelectorAll('.faq-question').forEach(item => {
+    item.addEventListener('click', () => {
+      const answer = item.nextElementSibling;
+      answer.classList.toggle('active');
+    });
+  });
+
+  // Chatbot Toggle
+  function toggleChatbot() {
+    const chatbot = document.getElementById('chatbot');
+    chatbot.classList.toggle('active');
+  }
+
+  // Send message to backend servlet
+  function sendMessage() {
+    const input = document.getElementById('chatbot-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Show user message
+    const userMessage = document.createElement('div');
+    userMessage.className = 'chat-message user-message';
+    userMessage.textContent = message;
+    document.getElementById('chatbot-body').appendChild(userMessage);
+
+    // Get base URL from current location
+    const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+    const servletUrl = baseUrl + '/chatbot';
+    console.log('Base URL:', baseUrl);
+    console.log('Servlet URL:', servletUrl);
+
+    // Create XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', servletUrl, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        console.log('Response Status:', xhr.status);
+        console.log('Response Headers:', xhr.getAllResponseHeaders());
+        console.log('Response Text:', xhr.responseText);
+        
+        const botMessage = document.createElement('div');
+        botMessage.className = 'chat-message bot-message';
+        
+        if (xhr.status === 200) {
+          try {
+            const data = JSON.parse(xhr.responseText);
+            if (data && data.reply) {
+              botMessage.textContent = data.reply;
+            } else {
+              console.error('Invalid response format:', data);
+              botMessage.textContent = "Received invalid response from server.";
+            }
+          } catch (e) {
+            console.error('Error parsing JSON:', e, 'Raw response:', xhr.responseText);
+            botMessage.textContent = "Error processing server response.";
+          }
+        } else {
+          console.error('Server returned status:', xhr.status);
+          botMessage.textContent = "Server is under maintenance. Please try again later.";
+        }
+        
+        document.getElementById('chatbot-body').appendChild(botMessage);
+        document.getElementById('chatbot-body').scrollTop = document.getElementById('chatbot-body').scrollHeight;
+      }
+    };
+
+    xhr.onerror = function(e) {
+      console.error('XHR Error:', e);
+      const botMessage = document.createElement('div');
+      botMessage.className = 'chat-message bot-message';
+      botMessage.textContent = "Cannot connect to server. Please try again later.";
+      document.getElementById('chatbot-body').appendChild(botMessage);
+    };
+
+    // Log the request details
+    console.log('Sending request to:', servletUrl);
+    console.log('Request payload:', 'message=' + message);
+
+    // Send the request
+    xhr.send('message=' + encodeURIComponent(message));
+
+    // Clear input
+    input.value = '';
+  }
+
+  // Send message on Enter key
+  document.getElementById('chatbot-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  // Initialize chatbot with a test connection
+  window.addEventListener('load', function() {
+    console.log('Testing chatbot connection...');
+    const xhr = new XMLHttpRequest();
+    const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+    const servletUrl = baseUrl + '/chatbot';
+    
+    xhr.open('POST', servletUrl, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        console.log('Initial test - Status:', xhr.status);
+        console.log('Initial test - Response:', xhr.responseText);
+      }
+    };
+    
+    xhr.send('message=hi');
+  });
+</script>
+</body>
+</html>
