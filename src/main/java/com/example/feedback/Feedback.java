@@ -1,10 +1,12 @@
 package com.example.feedback;
 
+import java.util.Date;
+
 public class Feedback {
     private int id;
     private int rating;
     private String couldDoBetter;
-    private String timestamp;
+    private Date timestamp;
 
     public Feedback() {}
 
@@ -22,6 +24,6 @@ public class Feedback {
     public String getCouldDoBetter() { return couldDoBetter; }
     public void setCouldDoBetter(String couldDoBetter) { this.couldDoBetter = couldDoBetter; }
 
-    public String getTimestamp() { return timestamp; }
-    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
+    public Date getTimestamp() { return timestamp; }
+    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
 }
