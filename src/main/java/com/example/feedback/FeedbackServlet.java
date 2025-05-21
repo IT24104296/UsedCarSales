@@ -24,7 +24,7 @@ public class FeedbackServlet extends HttpServlet {
         Feedback feedback = new Feedback();
         feedback.setRating(rating);
         feedback.setCouldDoBetter(couldDoBetter);
-        feedback.setTimestamp(new Date().toString());
+        feedback.setTimestamp(new Date());
 
         // Store feedback in session
         HttpSession session = request.getSession();
