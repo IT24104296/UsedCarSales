@@ -1,0 +1,34 @@
+<web-app>
+  <servlet>
+    <servlet-name>CarListServlet</servlet-name>
+    <servlet-class>com.vahinthan.usedcars.servlet.CarListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CarListServlet</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddCarServlet</servlet-name>
+    <servlet-class>com.vahinthan.usedcars.servlet.AddCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCarServlet</servlet-name>
+    <url-pattern>/add</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteCarServlet</servlet-name>
+    <servlet-class>com.vahinthan.usedcars.servlet.DeleteCarServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DeleteCarServlet</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+
