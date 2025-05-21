@@ -200,7 +200,7 @@
 </head>
 <body>
     <div class="feedback-container">
-        <h2>Feedback Form</h2>
+        <h2>Feedback</h2>
         <p class="feedback-intro">We value your opinion! Please share your feedback.</p>
 
         <form action="listFeedback" method="post" class="feedback-form">
@@ -232,7 +232,7 @@
 
             <div class="feedback-inputs">
                 <div class="input-group">
-                    <label for="feedback">What's one thing we could do better?</label>
+                    <label for="feedback">REVIEW</label>
                     <textarea name="couldDoBetter" id="couldDoBetter" rows="5" required></textarea>
                 </div>
             </div>
