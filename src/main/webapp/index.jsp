@@ -1,19 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Used Car Web App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Feedback Form</title>
     <style>
-        :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --accent-color: #facc15;
-            --neutral-color: #f9fafb;
-            --text-color: #333;
-            --bg-color: #ffffff;
-            --container-bg: rgba(255, 255, 255, 0.95);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -21,120 +12,247 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(30, 58, 138, 0.5)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #1e1e2f;
+            color: #e0e0f0;
+            background-image: url('https://wallpaperaccess.com/full/13672.jpg');
             background-size: cover;
+            background-position: center;
             background-attachment: fixed;
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-blend-mode: overlay;
+            background-color: rgba(30, 30, 47, 0.9);
         }
 
-        .container {
-            max-width: 700px;
-            margin: 20px;
-            padding: clamp(20px, 5vw, 40px);
-            background: var(--container-bg);
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+        .feedback-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: rgba(40, 40, 60, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
         }
 
         h2 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary-color);
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.2;
+            color: #b8b8ff;
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .tagline {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            margin-bottom: 30px;
+        .feedback-intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #cfcfe6;
         }
 
-        .btn {
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            padding: 15px 30px;
-            border-radius: 50px;
-            margin: 15px;
-            display: inline-block;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1em;
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .rating-section {
+            text-align: center;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 2rem;
+            color: #555;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #ffcc33;
+        }
+
+        .come-back-section {
+            margin-bottom: 1rem;
+        }
+
+        .come-back-section h3 {
+            margin-bottom: 0.8rem;
+            color: #b8b8ff;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #e0e0f0;
+        }
+
+        .feedback-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
             font-weight: 600;
-            text-transform: uppercase;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite;
+            color: #d0d0ff;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+        textarea {
+            padding: 0.8rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            background-color: rgba(20, 20, 30, 0.9);
+            color: #e0e0f0;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        textarea:focus {
+            outline: none;
+            border-color: #7f5af0;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            body {
-                background-attachment: scroll;
-            }
-            .btn {
-                animation: none;
-                transition: none;
-            }
+        .submit-btn {
+            background-color: #7f5af0;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            align-self: center;
+            min-width: 200px;
+        }
+
+        .submit-btn:hover {
+            background-color: #6246ea;
         }
 
         @media (max-width: 600px) {
-            .container {
-                margin: 10px;
-                padding: 20px;
+            .feedback-container {
+                margin: 1rem;
+                padding: 1rem;
             }
 
-            h2 {
-                font-size: 1.8rem;
+            .checkbox-group {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
             }
 
-            .tagline {
-                font-size: 1rem;
+            .star-rating label {
+                font-size: 1.5rem;
             }
 
-            .btn {
-                padding: 12px 25px;
-                font-size: 1em;
-                margin: 10px;
+            .submit-btn {
+                width: 100%;
             }
         }
 
-        @media (min-width: 1200px) {
-            .container {
-                display: grid;
-                grid-template-columns: 1fr minmax(0, 700px) 1fr;
-            }
-            .container > * {
-                grid-column: 2;
-            }
+        .message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #2e7d32;
+            color: #d0ffd0;
+            border: 1px solid #4caf50;
+        }
+
+        .error {
+            background-color: #c62828;
+            color: #ffd0d0;
+            border: 1px solid #ef5350;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>Welcome to Used Car Platform</h2>
-    <p class="tagline">Discover your dream car or sell yours with ease!</p>
-    <a href="list" class="btn" aria-label="View available cars">View Cars</a>
-    <a href="addCar.jsp" class="btn" aria-label="Add a new car">Add Car</a>
-</div>
+    <div class="feedback-container">
+        <h2>Feedback Form</h2>
+        <p class="feedback-intro">We value your opinion! Please share your feedback.</p>
+
+        <form action="listFeedback" method="post" class="feedback-form">
+            <div class="come-back-section">
+                <h3>Will You Come Back?</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="comeBack" value="yes"> Yes
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="comeBack" value="maybe"> Maybe
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="comeBack" value="no"> No
+                    </label>
+                </div>
+            </div>
+
+            <div class="rating-section">
+                <label for="rating">Your Rating:</label>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+                </div>
+            </div>
+
+            <div class="feedback-inputs">
+                <div class="input-group">
+                    <label for="feedback">What's one thing we could do better?</label>
+                    <textarea name="couldDoBetter" id="couldDoBetter" rows="5" required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+        </form>
+
+        <!-- Display messages based on status -->
+        <%
+            String status = request.getParameter("status");
+            if ("success".equals(status)) {
+        %>
+            <div class="message success">Thank you for your feedback!</div>
+        <%
+            } else if ("error".equals(status)) {
+        %>
+            <div class="message error">Something went wrong. Please try again.</div>
+        <%
+            }
+        %>
+    </div>
 </body>
 </html>

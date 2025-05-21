@@ -1,34 +1,29 @@
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+  <display-name>Feedback Web Application</display-name>
+
+  <!-- Optional: Define JSTL if needed -->
+  <jsp-config>
+    <taglib>
+      <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+      <taglib-location>/WEB-INF/lib/jstl-1.2.jar</taglib-location>
+    </taglib>
+  </jsp-config>
+
+  <!-- Optional: Define Servlet if NOT using @WebServlet -->
+  <!--
   <servlet>
-    <servlet-name>CarListServlet</servlet-name>
-    <servlet-class>com.vahinthan.usedcars.servlet.CarListServlet</servlet-class>
+      <servlet-name>FeedbackServlet</servlet-name>
+      <servlet-class>com.example.feedback.FeedbackServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CarListServlet</servlet-name>
-    <url-pattern>/list</url-pattern>
+      <servlet-name>FeedbackServlet</servlet-name>
+      <url-pattern>/listFeedback</url-pattern>
   </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AddCarServlet</servlet-name>
-    <servlet-class>com.vahinthan.usedcars.servlet.AddCarServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddCarServlet</servlet-name>
-    <url-pattern>/add</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>DeleteCarServlet</servlet-name>
-    <servlet-class>com.vahinthan.usedcars.servlet.DeleteCarServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>DeleteCarServlet</servlet-name>
-    <url-pattern>/delete</url-pattern>
-  </servlet-mapping>
-
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+  -->
 </web-app>
-
