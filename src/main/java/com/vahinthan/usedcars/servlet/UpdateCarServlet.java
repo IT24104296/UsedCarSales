@@ -29,21 +29,21 @@ public class UpdateCarServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect("listCars"); // fallback if ID not found
+        response.sendRedirect("list"); // fallback if ID not found
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        String make = request.getParameter("make");
+        String brand = request.getParameter("brand");
         String model = request.getParameter("model");
         int year = Integer.parseInt(request.getParameter("year"));
         double price = Double.parseDouble(request.getParameter("price"));
 
-        Car updatedCar = new Car(id, make, model, year, price);
+        Car updatedCar = new Car(id, brand, model, year, price);
         carDAO.updateCar(updatedCar);
 
-        response.sendRedirect("listCars");
+        response.sendRedirect("list");
     }
 }

@@ -2,27 +2,14 @@
 <%@ page import="java.util.*, com.vahinthan.usedcars.model.Car" %>
 <html>
 <head>
-  <title>Used Car Listings</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>🚘 Used Car Quest Board</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #1e3a8a;
-      --secondary-color: #3b82f6;
-      --accent-color: #facc15;
-      --neutral-color: #f9fafb;
-      --text-color: #333;
-      --bg-color: #ffffff;
-      --card-bg: #ffffff;
-    }
-
-    body.dark {
-      --primary-color: #93c5fd;
-      --secondary-color: #60a5fa;
-      --accent-color: #facc15;
-      --neutral-color: #1f2937;
-      --text-color: #f9fafb;
-      --bg-color: #111827;
-      --card-bg: #1e293b;
+      --accent: #00d9ff;
+      --danger: #ef4444;
+      --safe: #10b981;
+      --text-light: #e2e8f0;
     }
 
     * {
@@ -32,131 +19,119 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(to bottom right, #0f0f1e, #081229, #0a2342);
+      color: var(--text-light);
       min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      transition: background 0.3s ease, color 0.3s ease;
+      align-items: center;
+      padding: 40px 20px;
     }
 
     .container {
+      width: 100%;
       max-width: 1200px;
-      margin: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
       padding: clamp(20px, 5vw, 40px);
-      background: rgba(255, 255, 255, 0.95);
-      background-color: var(--card-bg);
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
       backdrop-filter: blur(10px);
-      transition: background-color 0.3s ease;
     }
 
     h2 {
-      font-family: 'Poppins', sans-serif;
       text-align: center;
-      color: var(--primary-color);
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--accent);
       margin-bottom: 30px;
-    }
-
-    .theme-toggle {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .theme-toggle button {
-      background: var(--accent-color);
-      border: none;
-      color: var(--bg-color);
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s ease;
+      text-shadow: 0 0 5px #00d9ff;
     }
 
     .car-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 25px;
     }
 
     .car-card {
-      background: var(--card-bg);
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid #00bcd4;
+      border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 188, 212, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .car-card:hover {
+      transform: translateY(-6px);
     }
 
     .car-card h3 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.5em;
+      font-size: 1.5rem;
       font-weight: 600;
-      color: var(--primary-color);
+      color: var(--accent);
     }
 
     .car-card p {
-      color: var(--text-color);
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #cbd5e1;
     }
 
     a.action {
       display: inline-block;
-      color: #fff;
-      background: linear-gradient(90deg, #dc2626, #ef4444);
+      margin: 10px 5px 0 5px;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-weight: bold;
+      color: white;
       text-decoration: none;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 50px;
-      margin-top: 10px;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
     }
 
-    .no-cars {
-      font-size: 1.2em;
-      text-align: center;
+    a.update {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    a.update:hover {
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+    }
+
+    a.delete {
+      background: linear-gradient(to right, #ef4444, #dc2626);
+    }
+
+    a.delete:hover {
+      background: linear-gradient(to right, #dc2626, #b91c1c);
     }
 
     a.back-link {
       display: block;
       text-align: center;
-      margin-top: 30px;
-      color: var(--primary-color);
-      font-weight: 600;
+      margin-top: 40px;
+      color: var(--accent);
+      font-weight: bold;
       text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .car-card, a.action, a.back-link {
-        transition: none;
-      }
+    a.back-link:hover {
+      color: #67e8f9;
+    }
+
+    .no-cars {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #facc15;
     }
   </style>
-  <script>
-    function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle('dark');
-      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark');
-      }
-    });
-  </script>
 </head>
 <body>
 <div class="container">
-  <div class="theme-toggle">
-    <button onclick="toggleTheme()">Toggle Dark Mode</button>
-  </div>
-  <h2>Used Car Listings</h2>
+  <h2>🚘 Car List</h2>
   <div class="car-grid">
     <%
       List<Car> cars = (List<Car>)request.getAttribute("cars");
@@ -167,13 +142,14 @@
       <h3><%= car.getBrand() %> <%= car.getModel() %></h3>
       <p>Year: <%= car.getYear() %></p>
       <p>Price: $<%= String.format("%.2f", car.getPrice()) %></p>
-      <a class="action" style="background: linear-gradient(90deg, #16a34a, #22c55e); margin-right: 8px;"
-         href="updateCar?id=<%= car.getId() %>">Update</a>
-      <a class="action" href="delete?id=<%= car.getId() %>">Delete</a>
+      <a class="action update" href="updateCar?id=<%= car.getId() %>">Update</a>
+      <a class="action delete" href="delete?id=<%= car.getId() %>">Delete</a>
     </div>
-    <%      }
-    } else { %>
-    <p class="no-cars">No cars listed yet.</p>
+    <%
+      }
+    } else {
+    %>
+    <p class="no-cars">⚠️ No cars available right now.</p>
     <% } %>
   </div>
   <a class="back-link" href="index.jsp">⬅ Back to Home</a>
